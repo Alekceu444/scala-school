@@ -1,5 +1,7 @@
 package homework.l2
 
+import scala.annotation.tailrec
+
 /**
   * В этом домашнем задании вам нужно написать так называёмую функцию свёртки (fold).
   * Что она должна делать:
@@ -15,7 +17,10 @@ package homework.l2
   * 4) Если список состоит из одного элемента, то tail вернёт Nil
   */
 object ListFunctions {
-
-  def fold[A, B](startValue: B, list: List[A])(f: (B, A) => B): B = ???
+  @tailrec
+  def fold[A, B](startValue: B, list: List[A])(f: (B, A) => B): B = {
+    if(list==Nil) startValue
+    else fold( f(startValue,list.head), list.tail)(f)
+  }
 
 }

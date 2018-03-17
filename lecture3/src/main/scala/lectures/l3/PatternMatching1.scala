@@ -5,8 +5,26 @@ package lectures.l3
   * как указано в комментарии к использованию
   */
 object PatternMatching1 extends App {
-  def f1(xs: Seq[Int]): Unit = ???
-  def f2(xs: Seq[Any]): Unit = ???
+  def f1(xs: Seq[Int]): Unit = {
+    xs.foreach{ x=>
+      x match {
+        case y if y%3==0 => println(y)
+        case _ =>
+      }
+    }
+  }
+  def f2(xs: Seq[Any]): Unit = {
+    xs.foreach{ x=>
+      x match {
+        case _: String => println(s"Got string: $x")
+        case y:Int if y<0 => println("Got minus! WOW!")
+        case _:Double => println(s"Got double: $x")
+        case l:Int if l % 10 == 0 => println(s"Got $l that divided by 10")
+        case _=>println(s"Unexpected value: $x")
+      }
+
+    }
+  }
 
   /**
     * Вывести только те числа, у которых остаток от деления на 3 равен 0

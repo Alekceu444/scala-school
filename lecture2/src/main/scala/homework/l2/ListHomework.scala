@@ -20,21 +20,33 @@ object ListHomework {
     */
   lazy val sumOfSquares: List[Int] => Int = { list =>
     val powPart = pow(_:Int,2)
-    val sumCurried = sum.curried
-    var par =0
-    def result(elem :Int) = sumCurried(par) compose powPart
-    val func =Function.uncurried(result _ )
-    ListFunctions.fold(0, list)(func)
+    var amount=0
+    val sumPart=sum(_:Int,amount)
+    def sumOfSquares = {x:Int=> {
+        x match {
+          case i=> amount=sumPart(i); amount
+        }
+      }
+    }
+    def funcCompose(elem :Int) = sumOfSquares compose powPart
+    val funcUncurried =Function.uncurried(funcCompose _)
+    ListFunctions.fold(0, list)(funcUncurried)
   }
   /**
     * Сумма кубов чисел в списке
     */
   lazy val multiplicationOfCubes: List[Int] => Int = { list=>
     val powPart = pow(_:Int,3)
-    val multiplyCurried = multiply.curried
-    var par=1
-    def result(elem:Int) = multiplyCurried(par) compose powPart
-    val func=Function.uncurried(result _ )
-    ListFunctions.fold(1,list)(func)
+    var compositionOfCubes=1
+    val multiplyPart=multiply(_:Int, compositionOfCubes)
+    def multiplyOfCubes = { x: Int => {
+        x match {
+          case i => compositionOfCubes = multiplyPart(i); compositionOfCubes
+        }
+      }
+    }
+    def funcCompose(elem:Int) = multiplyOfCubes compose powPart
+    val funcUncurried=Function.uncurried(funcCompose _ )
+    ListFunctions.fold(1, list)(funcUncurried)
   }
 }

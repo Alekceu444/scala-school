@@ -6,7 +6,7 @@ object Collection1 extends App {
   def multiplyK(seq: Seq[Int], k: Int): Seq[Int] = seq.map(_*k)
 
   // Реализовать функцию, которая выберет только те числка, что делятся на К без остатка
-  def devideOnK(seq: Seq[Int], k: Int): Seq[Int] = seq.filtre(_%k==0)
+  def devideOnK(seq: Seq[Int], k: Int): Seq[Int] = seq.filter(_%k==0)
 
   // Реализовать функцию, которая повторяет каждое число равное его значению раз, порядок сохраняется
   def numbers(seq: Int*): Seq[Int] = seq.flatMap(x=>Seq.fill(x)(x))//seq.flatMap(x=>(1 to x).map(Function.const(k)))

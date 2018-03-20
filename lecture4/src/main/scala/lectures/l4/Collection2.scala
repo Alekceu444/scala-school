@@ -15,14 +15,21 @@ object Collection2 extends App {
   // - map/flatMap
   // - filter
 
-  def collectorA(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = seq.collect({
-    case auto: Auto => auto
-    case track: Track if track.weight < maxweight => track
-    })
+  def collectorA(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = seq.collect{
+    case track:Track if track.weight<maxWeight=>track
+    case auto if auto.equals(Auto) => auto
+  }
 
-  def collectorB(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = seq.filter( )
+  def collectorB(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = seq.foldLeft(Seq[Transport]()) { (m: Seq[Transport], n: Transport) =>
+    n match {
+      case df if df.equals(Auto)=> m:+df
+      case fg:Track if fg.weight<maxWeight=>m:+fg
+      case _ => m
+    }
+  }
 
-  def collectorC(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = ???
+  def collectorC(seq: Seq[Transport], maxWeight: Int): Seq[Transport] = seq.filter((i:Transport)=>i.equals(Auto)
+    || i.asInstanceOf[Track].weight<maxWeight)
 
 
   val transports  = Seq(
